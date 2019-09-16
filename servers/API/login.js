@@ -1,6 +1,7 @@
 import * as querystring from 'querystring';
+import {cData} from '../data/data.js';
 function login(req,res){
-       console.log('run start')
+
     let postData="";
     req.setEncoding('utf-8');
   
@@ -11,10 +12,11 @@ function login(req,res){
            if(postData!==""){
               
             postData=querystring.parse(postData);
-            //postData=JSON.parse(postData);
+            postData=JSON.stringify(postData);
             res.writeHead(200, { "Content-Type": "application/json" });
            
-            res.write(JSON.stringify(postData));
+            res.write(postData);
+            cData.add('jsondata',JSON.parse(postData))
             console.log(postData)
             res.end();
            }else{

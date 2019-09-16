@@ -76,7 +76,7 @@ if(dataConfig.username!=''&& dataConfig.password!=''){
             this.connect().then(db=>{
                 db.collection(tableName).insertOne(json,(err,result)=>{
                     if(!err){
-                        resolve(result);
+                        resovle(result);
                         return;
                     };
                     reject(err)

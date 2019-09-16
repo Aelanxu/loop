@@ -6,8 +6,8 @@ let dataConfig={
     //数据库名
     database:'loopdb',
     //用户名
-    username:'',
+    username:'sa',
     //pwd
-    password:''
+    password:'sa'
 }
 export {dataConfig};
