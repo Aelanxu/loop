@@ -77,6 +77,7 @@ if(dataConfig.username!=''&& dataConfig.password!=''){
                 db.collection(tableName).insertOne(json,(err,result)=>{
                     if(!err){
                         resovle(result);
+                        resovle(result);
                         return;
                     };
                     reject(err)
