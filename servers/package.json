@@ -2,9 +2,10 @@
   "name": "loop",
   "version": "1.0.0",
   "description": "demo",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "node --nolazy --inspect-brk=9229 --experimental-modules index.js\""
+    "test": "node --nolazy --inspect-brk=9229 --experimental-modules index.js"
   },
   "repository": {
     "type": "git",
