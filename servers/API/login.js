@@ -15,10 +15,14 @@ function login(req,res){
             postData=JSON.stringify(postData);
             res.writeHead(200, { "Content-Type": "application/json" });
            
-            res.write(postData);
-            cData.add('jsondata',JSON.parse(postData))
-            console.log(postData)
-            res.end();
+           
+            cData.find('jsondata').then((data)=>{
+                   console.log(data);
+                   res.end(JSON.stringify(data));
+            })
+            //cData.add('jsondata',JSON.parse(postData))
+         
+           
            }else{
             let mes={mes:'nodata'}
             res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });

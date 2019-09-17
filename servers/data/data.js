@@ -120,7 +120,7 @@ if(dataConfig.username!=''&& dataConfig.password!=''){
        return new Promise((resolve,reject)=>{
            this.connect().then(db=>{
                let result =db.collection(tableName).find(json);
-               result.toArray((err,data)=>{
+               result.toArray((err,data)=>{//NOTE:toArray() is mothod of mongodb, not JS
                   if(!err){
                       resolve(data);
                       return;
