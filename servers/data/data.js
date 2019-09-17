@@ -1,3 +1,4 @@
+//封装数据操作类9/17
 import * as mongodb from 'mongodb';
 import {dataConfig} from'../config/config.js';//read the config for data
 //create the MongoClient of mongodb 

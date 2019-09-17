@@ -1,4 +1,4 @@
-
+//封装get/post 的方法用于复用9/18
 
 class getD{
     
