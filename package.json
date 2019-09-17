@@ -1,0 +1,22 @@
+{
+  "name": "loop",
+  "version": "1.0.0",
+  "description": "demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --nolazy --inspect-brk=9229 --experimental-modules index.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aelanxu/loop.git"
+  },
+  "keywords": [
+    "loop"
+  ],
+  "author": "aelanxu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aelanxu/loop/issues"
+  },
+  "homepage": "https://github.com/Aelanxu/loop#readme"
+}

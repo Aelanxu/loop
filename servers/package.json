@@ -1,5 +1,3 @@
-
-
 {
   "name": "loop",
   "version": "1.0.0",
@@ -7,9 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "debug": "node --nolazy --inspect-brk=9229 --experimental-modules index.js"
   },
   "author": "",
   "license": "ISC"
-  
 }
