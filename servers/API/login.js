@@ -6,6 +6,7 @@ import {getD} from '../getdata.js';
 function login(req,res){
         getD.POST(req,res).then((data)=>{
                console.log(JSON.stringify(querystring.parse(data)));
+               
         })
 //     let postData="";
 //     req.setEncoding('utf-8')
