@@ -1,6 +1,6 @@
   import * as http from 'http';
   import * as url from 'url';
-
+ 
 function start(router,handle){
     function onRequest(req,res){
           // 添加响应头实现跨域

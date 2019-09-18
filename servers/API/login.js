@@ -8,6 +8,10 @@ function login(req,res){
                console.log(JSON.stringify(querystring.parse(data)));
                
         })
+
+            
+
+}        
 //     let postData="";
 //     req.setEncoding('utf-8')
   
@@ -39,6 +43,5 @@ function login(req,res){
            
 //     })
   
-}
 
 export {login};

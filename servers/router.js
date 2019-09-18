@@ -1,5 +1,7 @@
-
-class router {
+import * as querystring from 'querystring';
+import {getD} from './getdata.js';
+import {cData} from './data/data.js';
+ class router {
     
     static getInstance(){
         if(!router.instance){
@@ -8,7 +10,7 @@ class router {
         return router.instance;
     };
     constructor() {
-
+    
         this.handle = {
             "/"(req, res) {
                 res.writeHead(200, { "Content-Type": "text/html" });
@@ -21,16 +23,28 @@ class router {
     };
 
  
-    route(handle, pathname, req, res) {
-
+    route( handle, pathname, req, res) {
+         // static router
         if ((typeof handle[pathname] === 'function') && (handle.hasOwnProperty(pathname))) {
             console.log(handle[pathname])
             return handle[pathname](req, res);
 
         } else {
-            res.writeHead(404, { "Content-Type": "text/plain" });
-            res.write('404 Not Found')
-            res.end();
+            //ative router is response json
+            let data={pathname}
+             cData.find('jsondata',data).then((data)=>{
+                if(data.length>0){
+                    console.log(data)
+                    res.writeHead(200, { "Content-Type": "application/json" });
+                    res.end(JSON.stringify(data));   
+                }else{
+                res.writeHead(404, { "Content-Type": "text/plain" });
+                res.write('404 Not Found')
+                res.end();
+               }   
+
+            });
+            
         };
 
     };
