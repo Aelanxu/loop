@@ -5,7 +5,9 @@ import {getD} from '../getdata.js';
 
 function login(req,res){
         getD.POST(req,res).then((data)=>{
-               console.log(JSON.stringify(querystring.parse(data)));
+               console.log(querystring.parse(data));
+
+               cData.add('users',querystring.parse(data)).then(result=>{console.log(result)})
                
         })
 

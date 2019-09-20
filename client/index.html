@@ -70,7 +70,7 @@
                         method: 'post',
                         url: `http://127.0.0.1:8888/api/login`,
 					   // data: {'text':'我是nodejsAPI','name':'这是一个例子'},
-					    data:{'text':'我是nodejsAPI','VDER':'kankan'},
+					    data:{'userName':'user','pwd':'123456',type:'0'},
                         transformRequest: [function (data) {
                             let ret = ''
                             for (let it in data) {

@@ -1,6 +1,6 @@
 let dataConfig={
     //地址
-    address:'localhost',
+    address:'139.9.136.28',
     //端口
     port:'27017',
     //数据库名
