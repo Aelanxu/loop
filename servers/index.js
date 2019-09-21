@@ -1,8 +1,11 @@
-import {start} from './server.js';
-import {router} from './router.js';
-import {login} from './API/login.js';
-router.addRoutes('/qq',(q,s)=>{console.log(3333)})
-router.addRoutes('/xxx',(q,s)=>{console.log(4444)})
-router.addRoutes('/api/login',login)
-
-start(router.route,router.handle);
+import { server } from './server.js';
+import { login } from './API/contorl.js';
+server.addRoutes("/", (req, res) => {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    res.write('hello world');
+    res.end();
+})
+server.addRoutes('/qq', (q, s) => { console.log(3333) })
+server.addRoutes('/xxx', (q, s) => { console.log(4444) })
+server.addRoutes('/api/login', login)
+server.start(server.handle);
