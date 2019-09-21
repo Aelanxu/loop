@@ -9,8 +9,7 @@ function login(req, res) {
 
         cData.add('users', querystring.parse(data)).then(result => {
             console.log(result.insertedId.toHexString()) //获取返回的ID
-            let timestamp = Date.now();
-            console.log(new Date(timestamp))
+            console.log(result.toString())
         })
 
     })
