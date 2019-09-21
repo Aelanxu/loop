@@ -1,13 +1,13 @@
-let dataConfig={
+let dataConfig = {
     //地址
-    address:'139.9.136.28',
+    address: '106.54.131.66',
     //端口
-    port:'27017',
+    port: '27017',
     //数据库名
-    database:'loopdb',
+    database: 'loopdb',
     //用户名
-    username:'sa',
+    username: 'sa',
     //pwd
-    password:'sa'
+    password: 'sa'
 }
-export {dataConfig};
+export { dataConfig };
