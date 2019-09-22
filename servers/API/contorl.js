@@ -15,6 +15,7 @@ function login(req, res) {
     });
     req.on('end', () => {
         if (postData) {
+
             cData.add('users', querystring.parse(postData)).then(result => {
                 console.log(result.insertedId.toHexString()) //获取返回的ID
                 let resData = { data: result.ops }
