@@ -12,7 +12,7 @@
           super();
       }
 
-      start(handle) {
+      start(handle,port) {
           let that = this;
 
           function onRequest(req, res) {
@@ -28,10 +28,50 @@
               that.route(handle, pathname, req, res);
 
           }
-          http.createServer(onRequest).listen(8888);
+          http.createServer(onRequest).listen(port);
           console.log("开始运行")
       }
+      POST(req,res){
+        let postData='';
+       return new Promise((resolve,reject)=>{
+              req.setEncoding('utf-8');
+              req.on('data',(chunk)=>{
+               
+               postData+=chunk;
+               
+              });
+              req.on('end',()=>{
+                     if(postData){
+                        
+                       resolve(postData);
+                       res.end();
+                       return;
+                      
+                      }else{
+                       reject('I can not get data！');
+                       res.end();
+                      }
+         });
+       });
 
+   }
+
+   GET(req,res){
+       let params="";
+       return new Promise((resolve,reject)=>{
+
+           params=url.parse(req.url,true).query;
+           if(params){
+               resolve(params);
+               res.end();
+               return;
+           }else{
+               reject(`I can't get any params!`);
+               res.end();
+           }
+       })
+   };
+   //
   }
 
   server = server.getInstance();

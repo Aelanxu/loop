@@ -1,14 +1,10 @@
 import * as querystring from 'querystring';
 import { getD } from './getdata.js';
 import { cData } from './data/data.js';
+
+//router for url
 class router {
 
-    static getInstance() {
-        if (!router.instance) {
-            router.instance = new router()
-        }
-        return router.instance;
-    }; //
     constructor() {
 
         this.handle = {}
@@ -57,6 +53,5 @@ class router {
 
 }
 
-//router=router.getInstance();
 
 export { router };

@@ -8,4 +8,4 @@ server.addRoutes("/", (req, res) => {
 server.addRoutes('/qq', (q, s) => { console.log(3333) })
 server.addRoutes('/xxx', (q, s) => { console.log(4444) })
 server.addRoutes('/api/login', login)
-server.start(server.handle);
+server.start(server.handle,8888);

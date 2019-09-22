@@ -46,7 +46,7 @@ class getD{
                 res.end();
                 return;
             }else{
-                reject('no get any params! ');
+                reject(`I can't get any params!`);
                 res.end();
             }
         })

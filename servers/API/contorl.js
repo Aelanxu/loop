@@ -1,15 +1,18 @@
 import * as querystring from 'querystring';
 import { cData } from '../data/data.js';
-import { getD } from '../getdata.js';
+import { server } from '../server.js';
 
 
 function login(req, res) {
-    getD.POST(req, res).then((data) => {
+    server.POST(req, res).then((data) => {
         console.log(querystring.parse(data));
 
         cData.add('users', querystring.parse(data)).then(result => {
             console.log(result.insertedId.toHexString()) //获取返回的ID
-            console.log(result.toString())
+            console.log(result.ops)
+            res.writeHead(200, { "Content-Type": "application/json" });
+            res.write("{}")
+            res.end()
         })
 
     })

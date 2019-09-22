@@ -75,7 +75,7 @@
 						method: 'post',
 						url: `http://127.0.0.1:8888/api/login`,
 						// data: {'text':'我是nodejsAPI','name':'这是一个例子'},
-						data: { 'userName': 'user', 'pwd': '123456', type: '0',date: this.localDate() },
+						data: { 'userName': 'admin', 'pwd': '123456', type: '1',createTime: this.localDate() },	
 						transformRequest: [function (data) {
 							let ret = ''
 							for (let it in data) {
