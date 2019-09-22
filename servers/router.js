@@ -1,5 +1,5 @@
 import * as querystring from 'querystring';
-import { getD } from './getdata.js';
+
 import { cData } from './data/data.js';
 
 //router for url
@@ -43,13 +43,17 @@ class router {
     addRoutes(pathName, func) {
 
         if (pathName) {
-            console.log(pathName)
+            //console.log(pathName)
+
             this.handle[pathName] = func;
 
+
         } else {
-            console.log('not allowd empity!');
+            console.log('*pathName is empity*');
         }
-    };
+    }; //
+
+
 
 }
 

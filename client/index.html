@@ -86,7 +86,7 @@
 						}]
 					}).then((response) => {
 						this.data = JSON.parse(JSON.stringify(response.data));
-						console.log(this.data)
+						console.log(response)
 						this.$toast({
 							type: 'success',
 							message: '传值成功'
