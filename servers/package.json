@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "test loop",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "test": "node --nolazy --inspect-brk=9229 --experimental-modules index.js",
     "start": "node --experimental-modules index.js"
@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/Aelanxu/loop/issues"
   },
-  "homepage": "https://github.com/Aelanxu/loop#readme"
+  "homepage": "https://github.com/Aelanxu/loop#readme",
+  "dependencies": {
+    "methods": "^1.1.2"
+  }
 }
