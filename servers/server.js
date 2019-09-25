@@ -8,7 +8,7 @@
 
       console.log(Router)
       const app = function(req, res) {
-          return app.handle(req, res)
+          app.handle(req, res)
       }
 
       mixin.default(app, proto, false)
@@ -21,14 +21,12 @@
       return server.listen.apply(server, arguments)
   }
 
-  proto.init = function() {
 
-  }
 
   proto.lazyrouter = function lazyrouter() {
       console.log(222)
       if (!this._router) {
-          this._router = new Router.default();
+          this._router = new Router.default({});
       }
   }
 
