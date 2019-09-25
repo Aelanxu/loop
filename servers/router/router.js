@@ -1,41 +1,60 @@
-
-'use strict' 
+'use strict'
 import * as flatten from 'array-flatten'
-import {Layer} from './layer.js'
+import { Layer } from './layer.js'
 import * as methods from 'methods'
-const slice=Array.prototype.slice
+const slice = Array.prototype.slice
 
- function Route(){
-    this.stack=[]
-    this.methods={}
+
+function Route(path) {
+    this.path = path
+    this.stack = []
+    this.methods = {}
 }
-Route.prototype._handle_method=function(method){
-    const name= method.toLowerCase()
-    return Boolean(this.methods[name])   
+Route.prototype._handle_method = function(method) {
+    const name = method.toLowerCase()
+    return Boolean(this.methods[name])
 }
-Route.prototype.dispatch=function(req,res){
-     
-    const method =req.method.toLowerCase()
-    const stack =this.stack
-    let idx=0
+Route.prototype.dispatch = function(req, res, done) {
+    const stack = this.stack
+    if (stack.length === 0) {
+        return done()
+    }
+    let idx = 0
+    const method = req.method.toLowerCase()
     next()
-    function next(){
-        const layer=stack[idx++]
-        if(layer.method&&layer.method!==method){
-            return next()
+
+    function next(err) {
+        if (err && err === 'route') {
+            return done()
         }
-        layer.handle_request(req,res,next)
+
+        if (err && err === 'router') {
+            return done(err)
+        }
+        const layer = stack[idx++]
+        if (!layer) {
+            return done(err)
+        }
+        if (layer.method && layer.method !== method) {
+            return next(err)
+        }
+        if (err) {
+            layer.handle_error(err, req, res, next)
+        } else {
+            layer.handle_request(req, res, next)
+        }
     }
 }
-methods.default.forEach(function(method){
+methods.default.forEach(function(method) {
 
-      Route.prototype[method]=function(){
-          const handles=flatten.default(slice.call(arguments))
-          for (let i=0;i<handles.length;i++){
-              const layer=new Layer(method,handles[i])
-              this.methods[method]=true
-              this.stack.push(layer)
-          }
-      }
+    Route.prototype[method] = function() {
+        const handles = flatten.default(slice.call(arguments))
+        for (let i = 0; i < handles.length; i++) {
+            const layer = new Layer('/', {}, handles[i])
+            layer.method = method
+            this.methods[method] = true
+            this.stack.push(layer)
+        }
+    }
 })
-export{Route,slice}
+export { Route, slice }
