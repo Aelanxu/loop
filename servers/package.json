@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/Aelanxu/loop#readme",
   "dependencies": {
+    "array-flatten": "^2.1.2",
+    "merge-descriptors": "^1.0.1",
     "methods": "^1.1.2"
   }
 }

@@ -1,21 +1,10 @@
-import { server } from './server.js';
+import loop from './server.js';
 //import { login } from './API/contorl.js';
-// server.addRoutes("/", (req, res) => {
-//     res.writeHead(200, { "Content-Type": "text/html" });
-//     res.write('hello world');
-//     res.end();
-// })
-// server.addRoutes('/qq', (q, s) => { console.log(3333) })
-// server.addRoutes('/xxx', (q, s) => { console.log(4444) })
-// server.addRoutes('/api/login', login)
-// server.start(server.handle,8888);
-// 处理GET请求
-let app = new server();
-console.log(app)
+let app=loop();
+
 app.get(function(req, res) {
-        console.log('You send GET request')
+    res.end('You send GET request')
     })
-    // 处理POST请求
 app.post(function(req, res) {
         res.end('You send POST request')
     })

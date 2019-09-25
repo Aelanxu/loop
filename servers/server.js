@@ -1,71 +1,37 @@
   import * as http from 'http';
-  import * as url from 'url';
-  import { cmethods } from './cmethods.js'
+  import * as methods from 'methods'
+  import { Layer } from './router/layer.js';
+  import * as mixin from 'merge-descriptors';
+  import {Route,slice}from './router/router.js';
+
+   export default function loop() {
 
 
-  class server extends cmethods {
-      //   static getInstance() {
-      //       if (!server.instance) {
-      //           server.instance = new server()
-      //       }
-      //       return server.instance;
-      //   };
-
-      constructor() {
-          super()
-
-          this.listen.apply(this.app, arguments)
-      };
-
-      app(req, res) {
-
-          console.log(2222222)
-          console.log(this.handles)
-          return this.handle(req, res)
-      }
-      listen() {
-              let server = http.createServer(this.app);
-              return server.listen.apply(server, arguments);
-
-          } //
-
-
+    const app = function (req, res) {
+      return  app.handle(req,res)
+    }
+    
+    mixin.default(app, proto, false)
+    app.init()
+    return app
   }
-  //   class server extends router {
-  //       static getInstance() {
-  //           if (!server.instance) {
-  //               server.instance = new server()
-  //           }
-  //           return server.instance;
-  //       };
-  //       constructor() {
-  //           super();
-  //       }
+  const proto = Object.create(null)
+  proto.listen = function (port) {
+    const server = http.createServer(this)
+    return server.listen.apply(server, arguments)
+  }
+   proto.init=function(){
 
-  //       start(handle, port, func) {
-  //               let that = this;
+    this.route=new Route()
 
-  //               function onRequest(req, res) {
-  //                   // 添加响应头实现跨域
-  //                   res.setHeader("Access-Control-Allow-Origin", "*");
-
-  //                   let pathname = url.parse(req.url).pathname;
-  //                   console.log(pathname)
-  //                       // 关闭nodejs 默认访问 favicon.ico
-  //                   if (!pathname.indexOf('/favicon.ico')) {
-  //                       return;
-  //                   };
-  //                   that.route(handle, pathname, req, res);
-
-  //               }
-  //               http.createServer(onRequest).listen(port, func);
-  //               console.log("开始运行")
-  //           } //
-
-
-
-  //   }
-
-  //server = server.getInstance();
-
-  export { server };
+   }
+   proto.handle=function (){
+       this.route.dispatch.apply(this.route,slice.call(arguments))
+   }
+   methods.default.forEach(function(method) {
+    //console.log(method)
+    proto[method] = function(fn) {
+       this.route[method].apply(this.route,slice.call(arguments))
+    }
+   } )
+   

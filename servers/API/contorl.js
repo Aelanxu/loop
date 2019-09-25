@@ -29,12 +29,11 @@ function login(req, res) {
             console.log('*no get data*')
         }
     });
+}//
 
 
-
-
-
-
+function pushData(){
+    
 }
 //     let postData="";
 //     req.setEncoding('utf-8')
