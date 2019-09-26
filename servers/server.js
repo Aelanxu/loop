@@ -24,7 +24,7 @@
 
 
   proto.lazyrouter = function lazyrouter() {
-      console.log('lazyrouter')
+
       if (!this._router) {
           this._router = new Router.default({});
       }
@@ -39,7 +39,7 @@
   proto.handle = function(req, res, callback) {
       const router = this._router
       router.handle(req, res)
-      console.log(router.handle)
+          //console.log(router.handle)
   }
 
   proto.use = function() {
@@ -50,13 +50,12 @@
   methods.default.forEach(function(method) {
 
       proto[method] = function(path) {
-          console.log(method)
+
           this.lazyrouter()
-          console.log(this._router.route(path))
           const route = this._router.route(path)
           route[method].apply(route, slice.call(arguments, 1))
-          console.log(route)
-          console.log(this)
+              //console.log(route)
+              //console.log(this._router)
           return this
       }
   })

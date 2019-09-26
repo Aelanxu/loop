@@ -15,15 +15,18 @@ Route.prototype._handle_method = function(method) {
     return Boolean(this.methods[name])
 }
 Route.prototype.dispatch = function(req, res, done) {
+
     const stack = this.stack
     if (stack.length === 0) {
         return done()
+
     }
     let idx = 0
     const method = req.method.toLowerCase()
     next()
 
     function next(err) {
+
         if (err && err === 'route') {
             return done()
         }
@@ -40,8 +43,10 @@ Route.prototype.dispatch = function(req, res, done) {
         }
         if (err) {
             layer.handle_error(err, req, res, next)
+
         } else {
             layer.handle_request(req, res, next)
+
         }
     }
 }

@@ -10,8 +10,10 @@ const slice = Array.prototype.slice
 
 
 export default function proto(options) {
-   const router= function(req, res, next) {
+    function router(req, res, next) {
+
         router.handle(req, res, next)
+
     }
     setPrototypeOf(router, proto)
     router.params = {}
@@ -82,25 +84,32 @@ proto.handle = function handle(req, res, out) {
         const self = this
         const stack = this.stack
         let idx = 0
+
         const finalHandler = function(req, res) {
             console.log('reach final handler')
+
         }
         next()
 
         function next(err) {
+
             const layerError = err
             if (err === 'router') {
+
                 setImmediate(finalHandler, null)
                 return
             }
             if (idx >= stack.length) {
+
                 return setImmediate(finalHandler, null)
             }
             const path = getPathname(req)
+
             let layer
             let match
             let route
             while (match !== true && idx < stack.length) {
+
                 layer = stack[idx++]
                 match = matchLayer(layer, path)
                 route = layer.route
@@ -114,16 +123,20 @@ proto.handle = function handle(req, res, out) {
                     match = false
                     continue
                 }
+
                 const method = req.method
                 const hasMethod = route._handle_method(method)
                 if (!hasMethod) {
+
                     match = false
                     continue
                 }
             }
             if (match !== true) {
+
                 return finalHandler(layerError)
             }
+
             req.params = layer.params
             self.process_params(layer, req, res, function(err) {
                 if (err) {
@@ -143,7 +156,8 @@ proto.handle = function handle(req, res, out) {
     // get pathname of request
 function getPathname(req) {
     try {
-        return parseUrl(req).pathname
+
+        return parseUrl.default(req).pathname
     } catch (err) {
         return undefined
     }

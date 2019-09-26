@@ -11,7 +11,7 @@ function Layer(path, options, fn) {
     this.path = undefined
     this.regexp = pathRegexp.default(path, this.keys = [], opts)
     this.regexp.fast_star = path === '*'
-    this.regexp.fast_slash = path == '/'
+    this.regexp.fast_slash = path === '/'
 }
 Layer.prototype.handle_method = function(req) {
     return this.method.toLowerCase() === req.method.toLowerCase()
@@ -19,7 +19,6 @@ Layer.prototype.handle_method = function(req) {
 Layer.prototype.handle_request = function(req, res, next) {
 
     const fn = this.handle
-
     if (fn.length > 3) {
         return next()
     }
