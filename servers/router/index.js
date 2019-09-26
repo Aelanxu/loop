@@ -10,7 +10,7 @@ const slice = Array.prototype.slice
 
 
 export default function proto(options) {
-    function router(req, res, next) {
+   const router= function(req, res, next) {
         router.handle(req, res, next)
     }
     setPrototypeOf(router, proto)

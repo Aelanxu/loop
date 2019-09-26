@@ -6,7 +6,7 @@
 
   export default function loop() {
 
-      console.log(Router)
+      //console.log(Router)
       const app = function(req, res) {
           app.handle(req, res)
       }
@@ -24,7 +24,7 @@
 
 
   proto.lazyrouter = function lazyrouter() {
-      console.log(222)
+      console.log('lazyrouter')
       if (!this._router) {
           this._router = new Router.default({});
       }
@@ -39,6 +39,7 @@
   proto.handle = function(req, res, callback) {
       const router = this._router
       router.handle(req, res)
+      console.log(router.handle)
   }
 
   proto.use = function() {
@@ -55,6 +56,7 @@
           const route = this._router.route(path)
           route[method].apply(route, slice.call(arguments, 1))
           console.log(route)
+          console.log(this)
           return this
       }
   })
