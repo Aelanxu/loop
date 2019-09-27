@@ -3,19 +3,19 @@
   import * as mixin from 'merge-descriptors'
   import * as Router from './router/index.js'
   import * as res from './response.js'
+
   const slice = Array.prototype.slice
 
-   function loop() {
+  function loop() {
 
       //console.log(Router)
-      const app = function(req, res,next) {
-          app.handle(req, res,next)
+      const app = function(req, res, next) {
+
+          app.handle(req, res, next)
       }
 
       mixin.default(app, proto, false)
-      app.response = Object.create(res, {
-        app: { configurable: true, enumerable: true, writable: true, value: app }
-      })
+
       return app
   }
   const proto = Object.create(null)
@@ -41,8 +41,8 @@
 
   proto.handle = function(req, res, callback) {
       const router = this._router
-      router.handle(req, res)
-          //console.log(router.handle)
+      router.handle(req, this.response.default)
+
   }
 
   proto.use = function() {
@@ -62,5 +62,13 @@
           return this
       }
   })
+
+  proto.response = Object.create(res, {
+      proto: { configurable: true, enumerable: true, writable: true, value: proto }
+  })
+
+
+
+
 
   export default loop

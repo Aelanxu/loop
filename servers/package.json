@@ -23,6 +23,7 @@
   "homepage": "https://github.com/Aelanxu/loop#readme",
   "dependencies": {
     "array-flatten": "^2.1.2",
+    "express": "^4.17.1",
     "merge-descriptors": "^1.0.1",
     "methods": "^1.1.2",
     "parseurl": "^1.3.3",

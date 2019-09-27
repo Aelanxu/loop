@@ -1,15 +1,17 @@
 import loop from './zero/server.js';
 
 import { login } from './API/contorl.js';
-let app = loop();
-// app.get('/foo', function handle1(req, res, next) {
-//     next(new Error('Bang!'))
-// }, function handle2(req, res, next) {
-//     res.end('Will not go here')
-// }, function handle3(err, req, res, next) {
-//     console.log(`Error Caught! Error message is ${err.message}`)
-//     next(err)
-// })
+const app = loop();
+
+console.log(app)
+    // app.get('/foo', function handle1(req, res, next) {
+    //     next(new Error('Bang!'))
+    // }, function handle2(req, res, next) {
+    //     res.end('Will not go here')
+    // }, function handle3(err, req, res, next) {
+    //     console.log(`Error Caught! Error message is ${err.message}`)
+    //     next(err)
+    // })
 
 // app.get('/foo', function(req, res, next) {
 //     res.end('Will not go here too')
@@ -29,8 +31,13 @@ let app = loop();
 //     res.end('Go here')
 // })
 
-app.get('/foo', function(req,res){
+app.get('/foo', function(req, res) {
+
+    console.log(res.send())
     console.log(res)
+
+
+
 })
 
 app.listen(8888)
