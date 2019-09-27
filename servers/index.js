@@ -1,4 +1,5 @@
-import loop from './server.js';
+import loop from './zero/server.js';
+
 import { login } from './API/contorl.js';
 let app = loop();
 // app.get('/foo', function handle1(req, res, next) {
@@ -28,6 +29,8 @@ let app = loop();
 //     res.end('Go here')
 // })
 
-app.get('/foo', login)
+app.get('/foo', function(req,res){
+    console.log(res)
+})
 
 app.listen(8888)

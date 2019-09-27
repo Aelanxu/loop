@@ -1,18 +1,21 @@
-  import * as http from 'http';
+  import * as http from 'http'
   import * as methods from 'methods'
-  import * as mixin from 'merge-descriptors';
-  import * as Router from './router/index.js';
+  import * as mixin from 'merge-descriptors'
+  import * as Router from './router/index.js'
+  import * as res from './response.js'
   const slice = Array.prototype.slice
 
-  export default function loop() {
+   function loop() {
 
       //console.log(Router)
-      const app = function(req, res) {
-          app.handle(req, res)
+      const app = function(req, res,next) {
+          app.handle(req, res,next)
       }
 
       mixin.default(app, proto, false)
-
+      app.response = Object.create(res, {
+        app: { configurable: true, enumerable: true, writable: true, value: app }
+      })
       return app
   }
   const proto = Object.create(null)
@@ -59,3 +62,5 @@
           return this
       }
   })
+
+  export default loop
