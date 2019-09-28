@@ -33,7 +33,7 @@ const app = loop();
 
 app.get('/foo', function(req, res) {  
   // res.end('222')
-   res.send('11')
+   res.send('国庆节快乐')
  console.log(res.send)
     
 
