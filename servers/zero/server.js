@@ -41,7 +41,7 @@
 
   proto.handle = function(req, res, callback) {
       const router = this._router
-      router.handle(req, this.response.default)
+      router.handle(req, Object.setPrototypeOf(res,this.response.default))
 
   }
 
@@ -57,8 +57,7 @@
           this.lazyrouter()
           const route = this._router.route(path)
           route[method].apply(route, slice.call(arguments, 1))
-              //console.log(route)
-              //console.log(this._router)
+             
           return this
       }
   })
