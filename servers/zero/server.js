@@ -3,7 +3,8 @@
   import * as mixin from 'merge-descriptors'
   import * as Router from './router/index.js'
   import * as res from './response.js'
-
+  import * as events from 'events'
+  const eventEmitter=new events.EventEmitter()
   const slice = Array.prototype.slice
 
   function loop() {
@@ -13,9 +14,9 @@
 
           app.handle(req, res, next)
       }
-
+      mixin.default(app, eventEmitter.prototype, false);
       mixin.default(app, proto, false)
-
+      app.init()
       return app
   }
   const proto = Object.create(null)
@@ -25,7 +26,11 @@
   }
 
 
-
+proto.init=function(){
+      this.on('mount',function(){
+        console.log('some_event 事件触发'); 
+      })
+}
   proto.lazyrouter = function lazyrouter() {
 
       if (!this._router) {
