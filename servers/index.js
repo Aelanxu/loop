@@ -1,45 +1,19 @@
 import express from 'express'
-
-//import { login } from './API/contorl.js';
+import * as bodyParser from 'body-parser'
+import { pushData } from './API/contorl.js';
 const app = express();
-//console.log(app)
-
-
-// app.get('/foo', function handle1(req, res, next) {
-//     next(new Error('Bang!'))
-// }, function handle2(req, res, next) {
-//     res.end('Will not go here')
-// }, function handle3(err, req, res, next) {
-//     console.log(`Error Caught! Error message is ${err.message}`)
-//     next(err)
-// })
-
-// app.get('/foo', function(req, res, next) {
-//     res.end('Will not go here too')
-// })
-
-// app.use('/foo', function(req, res, next) {
-//     res.end('Will not go here too')
-// })
-
-// app.get('/foo', function(err, req, res, next) {
-//     console.log(err.name)
-//     res.end('Will not go here too')
-// })
-
-// app.use('/foo', function(err, req, res, next) {
-//     console.log(`Error Caught! Error message is ${err.message}`)
-//     res.end('Go here')
-// })
-
-app.get('/foo', function(req, res, next) {
-    // res.end('222')
-    res.end('eeee')
-   // res.send('5555')
-
-
-
-
+app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+    res.header("X-Powered-By", ' 3.2.1')
+    res.header("Content-Type", "application/json;charset=utf-8");
+    next();
+});
+app.use(bodyParser.default.urlencoded({ extended: false })) //tip:resolve accept the data of post is undefind
+app.post('/api/push', pushData)
+app.get('/ab?cd', function(req, res) {
+    res.send('ab?cd')
 })
 
 

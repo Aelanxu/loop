@@ -22,7 +22,7 @@ export default {
       axios({
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         method: "post",
-        url: `${host}/api/login`,
+        url: `${host}/api/push`,
         data: {
           userName: "admin",
           pwd: "123456",
@@ -44,9 +44,10 @@ export default {
           }
         ]
       }).then(response => {
-        if (response.data.data) {
-          this.datalist = JSON.parse(JSON.stringify(response.data.data));
-          console.log(response.data.data);
+        
+        if (response.data) {
+          this.datalist = JSON.parse(JSON.stringify(response.data));
+          console.log(response.data);
         }
       });
     }
