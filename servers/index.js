@@ -1,7 +1,7 @@
-import loop from './zero/server.js';
+import express from 'express'
 
-import { login } from './API/contorl.js';
-const app = loop();
+//import { login } from './API/contorl.js';
+const app = express();
 //console.log(app)
 
 
@@ -41,14 +41,6 @@ app.get('/foo', function(req, res, next) {
 
 
 })
-app.get('/name', function(req, res, next) {
-  // res.end('222')
- // res.end('3333')
- res.send('5555')
 
-
-
-
-})
 
 app.listen(8888)
