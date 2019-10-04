@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
 
 //1。创建组件
@@ -9,7 +13,7 @@ import DataList from './components/DataList.vue';
 //2. 配置路由
 const routes = [
         { path: '/login', component: Login },
-        { path: '/datalist', component: DataList },
+        { path: '/datalist/:id', component: DataList, props: true },
         { path: '*', redirect: '/login' }, //默认跳转路由
     ]
     //3.实例化vueRouter

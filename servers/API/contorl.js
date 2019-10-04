@@ -1,43 +1,69 @@
-import { cData } from '../data/data.js';
+import { cData } from '../data/data.js'
+import * as url from 'url'
+import { runInNewContext } from 'vm'
+
+const controlers = Object.create(null)
+controlers.path = null
+    //look up the path
+controlers.lookUp = function(req, res, next) {
+    let pathname = url.parse(req.url).pathname
+    console.log(pathname)
+    cData.find('jsondata', { path: pathname }).then(result => {
+        console.log(result[0])
+        console.log(result)
+        if (result.length > 1) {
+            res.send(result[0].path)
+            controlers.path = result[0].path
+        } else {
+            next();
+        }
+
+        //next()
+
+    })
+
+}
+controlers.pushData = function(req, res) {
+
+    let jdata = JSON.parse(Object.keys(req.body)[0])
+    console.log(jdata)
+
+    cData.add('jsondata', jdata).then(result => {
+        console.log(result.insertedId.toHexString()) //获取返回的ID
+        let resData = { data: result.ops }
+        console.log(result.ops)
+        res.send(result.ops)
 
 
-
-function login(req, res) {
-
-    // let postData = '';
-
-    // req.setEncoding('utf-8');
-    // req.on('data', (chunk) => {
-
-    //     postData += chunk;
-
-    // });
-    // req.on('end', () => {
-    //     if (postData) {
-
-    //         cData.add('users', querystring.parse(postData)).then(result => {
-    //             console.log(result.insertedId.toHexString()) //获取返回的ID
-    //             let resData = { data: result.ops }
-    //             console.log(result.ops)
-    //             sent.json(res, resData)
-
-
-    //         })
-
-    //     } else {
-    //         console.log('*no get data*')
-    //     }
-    // });
-} //
-
-
-function pushData(req, res) {
-
-
-    res.send(req.body)
+    })
 
 
 }
+controlers.login = function(req, res) {
+    let data = { userName: req.body.userName, pwd: req.body.pwd }
+    console.log(data)
+
+    cData.find('users', data).then(result => {
+        //res.end(data.insertedId.toHexString())
+        let resjson = {}
+        console.log(result)
+        if (result.length < 1) {
+            resjson = { id: null }
+
+        } else {
+            resjson = { id: result[0]._id }
+
+        }
+        res.send(resjson)
+
+
+    })
+}
+
+
+
+
+
 //     let postData="";
 //     req.setEncoding('utf-8')
 
@@ -70,4 +96,4 @@ function pushData(req, res) {
 //     })
 
 
-export { pushData }
+export { controlers }

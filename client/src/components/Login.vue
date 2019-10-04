@@ -1,7 +1,7 @@
 <template>
     <div id="lgoin">
       <h3>用户登录</h3>
-          <input type="text" :v-model="username" placeholder="PLEASE INPUT YOUR ACCONT">
+          <input type="text"  v-model="username" placeholder="PLEASE INPUT YOUR ACCONT">
           <br>
           <input type="password" v-model="password" placeholder="PLEASE ENTER YOUR PWD">
           <br>
@@ -14,6 +14,8 @@
 </template>
 <script>
 import DataList from './DataList.vue';
+import { host, localDate } from "../config.js";
+
 export default {
      data(){
 
@@ -24,9 +26,42 @@ export default {
      },
      methods:{
          login(){
-             this.$router.push('/DataList')
-         }
-     },
+            this.axios({
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        method: "post",
+        url: `${host}/api/login`,
+        data: {
+          userName:this.username,
+          pwd: this.password
+        },
+        transformRequest: [
+          function(data) {
+            let ret = "";
+            for (let it in data) {
+              ret +=
+                encodeURIComponent(it) +
+                "=" +
+                encodeURIComponent(data[it]) +
+                "&";
+            }
+            ret = ret.replace(/&$/, ""); //字串后面多余的"&"
+            return ret;
+          }
+        ]
+      }).then(response => {
+          let id=response.data.id
+        if (id===null) {
+          
+
+        }else{
+           //this.datalist = JSON.parse(JSON.stringify(response.data));
+            this.$router.push(`/DataList/${id}`)
+        }
+      });
+              
+           
+         }//
+     },//
      
 }
 </script>
