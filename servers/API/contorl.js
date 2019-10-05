@@ -3,7 +3,6 @@ import * as url from 'url'
 import { runInNewContext } from 'vm'
 
 const controlers = Object.create(null)
-controlers.path = null
     //look up the path
 controlers.lookUp = function(req, res, next) {
     let pathname = url.parse(req.url).pathname
@@ -11,14 +10,13 @@ controlers.lookUp = function(req, res, next) {
     cData.find('jsondata', { path: pathname }).then(result => {
         console.log(result[0])
         console.log(result)
-        if (result.length > 1) {
-            res.send(result[0].path)
-            controlers.path = result[0].path
+        if (result[0].length > 1) {
+            res.send(result[0])
         } else {
             next();
         }
 
-        //next()
+
 
     })
 
