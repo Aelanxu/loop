@@ -1,7 +1,7 @@
 <template>
   <div id="DataList">
     <div v-for='(item,index) in datalist'>
-      <h4>{{item.path}}</h4>
+      <h4>{{item.apiName}}{{item.path}}</h4>
     </div>
     <p >{{id}} </p>
     <input type="button" value="点击提交获取数据" @click="getdata()" />
@@ -25,7 +25,7 @@ export default {
     props: ['id'],
   methods: {
     getdata() {
-      let postData={userId:this.id, path:'/test/api',data:{n:111,MJ:'WWW',OBJ:{N:'TT'}}}
+      let postData={userId:this.id,apiName:'登录接口', path:'/test/api',data:{n:111,MJ:'WWW',OBJ:{N:'TT'}}}
       this.axios({
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         method: "post",
