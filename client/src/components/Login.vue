@@ -36,14 +36,14 @@ export default {
         }
      
       }).then(response => {
-          let id=response.data.id
-        if (id===null) {
+          let userid=response.data.id
+        if (userid===null) {
           
           console.log('no')
 
         }else{
            //this.datalist = JSON.parse(JSON.stringify(response.data));
-            this.$router.push(`/DataList/${id}`)
+            this.$router.push(`/DataList/${userid}`)
         }
       });
               

@@ -1,9 +1,9 @@
 <template>
   <div id="DataList">
     <div v-for='(item,index) in datalist'>
-      <h4>{{item.apiName}}{{item.path}}</h4>
+      <h4><router-link :to="`/data/pushdata/${item._id}`">{{item.apiName}}{{item.path}}</router-link></h4>
     </div>
-    <p >{{id}} </p>
+    <p >{{userid}} </p>
     <input type="button" value="点击提交获取数据" @click="getdata()" />
   </div>
 </template>
@@ -15,14 +15,13 @@ export default {
   data() {
    
     return {
-     
       datalist:[]
     }
   },
   mounted() {
   
   },
-    props: ['id'],
+    props: ['userid'],
   methods: {
     getdata() {
       let postData={userId:this.id,apiName:'登录接口', path:'/test/api',data:{n:111,MJ:'WWW',OBJ:{N:'TT'}}}

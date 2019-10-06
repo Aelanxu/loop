@@ -10,10 +10,12 @@ Vue.use(VueRouter)
 //1。创建组件
 import Login from './components/Login.vue';
 import DataList from './components/DataList.vue';
+import PushData from './components/data/PushData.vue'
 //2. 配置路由
 const routes = [
         { path: '/login', component: Login },
-        { path: '/datalist/:id', component: DataList, props: true },
+        { path: '/datalist/:userid', component: DataList, props: true },
+        { path: '/data/pushdata/:id', component: PushData, props: true },
         { path: '*', redirect: '/login' }, //默认跳转路由
     ]
     //3.实例化vueRouter
