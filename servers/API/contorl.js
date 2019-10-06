@@ -8,15 +8,13 @@ controlers.lookUp = function(req, res, next) {
     let pathname = url.parse(req.url).pathname
     console.log(pathname)
     cData.find('jsondata', { path: pathname }).then(result => {
-        console.log(result[0])
         console.log(result)
-        if (result[0].length > 1) {
-            res.send(result[0])
+            //console.log(result)
+        if (result.length > 0) {
+            res.send(result[0].data)
         } else {
             next();
         }
-
-
 
     })
 
@@ -38,10 +36,10 @@ controlers.pushData = function(req, res) {
 
 }
 controlers.login = function(req, res) {
-    let data = { userName: req.body.userName, pwd: req.body.pwd }
-    console.log(data)
+    let reqData = Object.keys(req.body)[0]
+    console.log(reqData)
 
-    cData.find('users', data).then(result => {
+    cData.find('users', reqData).then(result => {
         //res.end(data.insertedId.toHexString())
         let resjson = {}
         console.log(result)

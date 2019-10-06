@@ -27,31 +27,19 @@ export default {
      methods:{
          login(){
             this.axios({
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        headers: { "Content-Type": "application/json" },
         method: "post",
         url: `${host}/api/login`,
         data: {
           userName:this.username,
           pwd: this.password
-        },
-        transformRequest: [
-          function(data) {
-            let ret = "";
-            for (let it in data) {
-              ret +=
-                encodeURIComponent(it) +
-                "=" +
-                encodeURIComponent(data[it]) +
-                "&";
-            }
-            ret = ret.replace(/&$/, ""); //字串后面多余的"&"
-            return ret;
-          }
-        ]
+        }
+     
       }).then(response => {
           let id=response.data.id
         if (id===null) {
           
+          console.log('no')
 
         }else{
            //this.datalist = JSON.parse(JSON.stringify(response.data));
