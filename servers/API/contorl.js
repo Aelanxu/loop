@@ -8,8 +8,8 @@ controlers.lookUp = function(req, res, next) {
     let pathname = url.parse(req.url).pathname
     console.log(pathname)
     cData.find('jsondata', { path: pathname }).then(result => {
-        console.log(result)
-            //console.log(result)
+        //console.log(result)
+        //console.log(result)
         if (result.length > 0) {
             res.send(result[0].data)
         } else {
@@ -18,6 +18,19 @@ controlers.lookUp = function(req, res, next) {
 
     })
 
+}
+controlers.read = function(req, res) {
+    let data = Object.keys(req.body)[0]
+
+    cData.find('jsondata', data).then(result => {
+
+        if (result.length > 0) {
+            //console.log(result[0])
+            res.send(result)
+        } else {
+            res.send([{ msg: 'nodata' }])
+        }
+    })
 }
 controlers.pushData = function(req, res) {
 

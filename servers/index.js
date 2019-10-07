@@ -14,8 +14,9 @@ app.all('*', function(req, res, next) {
 app.use(bodyParser.default.json())
 app.use(bodyParser.default.urlencoded({ extended: false })) //tip:resolve accept the data of post is undefind
 app.use('/', controlers.lookUp)
-app.post('/api/login', controlers.login)
-app.post('/api/push', controlers.pushData)
+app.post('/login', controlers.login) //login interface
+app.post('/push', controlers.pushData) //write data interface
+app.post('/read', controlers.read)
 app.get('/ab?cd', function(req, res) {
     res.send('ab?cd')
 })

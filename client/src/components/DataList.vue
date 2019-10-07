@@ -24,17 +24,18 @@ export default {
     props: ['userid'],
   methods: {
     getdata() {
-      let postData={userId:this.id,apiName:'登录接口', path:'/test/api',data:{n:111,MJ:'WWW',OBJ:{N:'TT'}}}
+     // let postData={userId:this.userid,apiName:'登录接口', path:'/test/api',data:{n:111,MJ:'WWW',OBJ:{N:'TT'}}}
+      let postData={userId:this.userid}
       this.axios({
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         method: "post",
-        url: `${host}/api/push`,
+        url: `${host}/read`,
         data: JSON.stringify(postData)
       }).then(response => {
          console.log(response);
         if (response.data) {
-          this.datalist = JSON.parse(JSON.stringify(response.data));
-          console.log(response.data);
+          this.datalist = response.data;
+          console.log(this.datalist );
         }
       });
     }
