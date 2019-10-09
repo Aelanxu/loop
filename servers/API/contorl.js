@@ -33,15 +33,18 @@ controlers.read = function(req, res) {
         }
     })
 }
-controlers.updata=function(req,res){
-    let data = Object.keys(req.body)[0]
-    let id=cData.ObjectId(JSON.parse(data)._id)
+controlers.update = function(req, res) {
+    let data = JSON.parse(Object.keys(req.body)[0])
+    let id = cData.ObjectId(data._id)
     console.log(data)
     console.log(id)
-     cData.updata('jsondata',{_id:id},data).then(result=>{
-    console.log(result)
-   })
-      
+    cData.update('jsondata', { _id: id }, { apiName: data.apiName, path: data.path, data: data.data }).then(result => {
+        console.log(result.result.ok)
+        if (result.result.ok === 1) {
+            res.send({ msg: 'success' })
+        }
+    })
+
 }
 controlers.pushData = function(req, res) {
 
@@ -79,41 +82,6 @@ controlers.login = function(req, res) {
 
     })
 }
-
-
-
-
-
-//     let postData="";
-//     req.setEncoding('utf-8')
-
-//     req.on('data',function(chunk){
-//            postData+=chunk;
-//     })
-//     req.on('end',function(){
-//            if(postData!==""){
-
-//             postData=querystring.parse(postData);
-//             postData=JSON.stringify(postData);
-//             res.writeHead(200, { "Content-Type": "application/json" });
-
-
-//             cData.find('jsondata').then((data)=>{
-//                    console.log(data);
-//                    res.end(JSON.stringify(data));
-//             })
-//             //cData.add('jsondata',JSON.parse(postData))
-
-
-//            }else{
-//             let mes={mes:'nodata'}
-//             res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
-//             res.write(mes.mes);
-//             res.end();
-//            }
-
-
-//     })
 
 
 export { controlers }

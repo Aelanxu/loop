@@ -17,7 +17,7 @@ app.use('/', controlers.lookUp)
 app.post('/login', controlers.login) //login interface
 app.post('/push', controlers.pushData) //write data interface
 app.post('/read', controlers.read)
-app.post('/updata', controlers.updata)
+app.post('/updata', controlers.update)
 
 
 app.listen(8888)
