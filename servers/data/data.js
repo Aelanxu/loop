@@ -3,6 +3,7 @@ import * as mongodb from 'mongodb';
 import { dataConfig } from '../config/config.js'; //read the config for data
 //create the MongoClient of mongodb 
 const MongoClient = mongodb.default.MongoClient;
+const ObjectId =mongodb.default.ObjectId 
 //check username
 let state = null;
 if (dataConfig.username != '' && dataConfig.password != '') {
@@ -27,6 +28,7 @@ class cData {
         this.dbClient = '';
         //init connect database
         this.connect();
+        
     };
 
     connect() {
@@ -131,6 +133,12 @@ class cData {
             });
         });
     };
+
+    //ObjectId()
+    ObjectId(str){
+           return new ObjectId(str)
+     
+    }
 
 }
 cData = cData.getInstance();

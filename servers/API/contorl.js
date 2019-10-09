@@ -1,6 +1,7 @@
 import { cData } from '../data/data.js'
 import * as url from 'url'
-import { runInNewContext } from 'vm'
+
+
 
 const controlers = Object.create(null)
     //look up the path
@@ -34,12 +35,13 @@ controlers.read = function(req, res) {
 }
 controlers.updata=function(req,res){
     let data = Object.keys(req.body)[0]
-    let condtition=JSON.stringify({_id:JSON.parse(data)._id})
+    let id=cData.ObjectId(JSON.parse(data)._id)
     console.log(data)
-    console.log(condtition)
-   cData.updata('jsondata',condtition,data).then(result=>{
+    console.log(id)
+     cData.updata('jsondata',{_id:id},data).then(result=>{
     console.log(result)
    })
+      
 }
 controlers.pushData = function(req, res) {
 
