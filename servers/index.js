@@ -17,9 +17,7 @@ app.use('/', controlers.lookUp)
 app.post('/login', controlers.login) //login interface
 app.post('/push', controlers.pushData) //write data interface
 app.post('/read', controlers.read)
-app.get('/ab?cd', function(req, res) {
-    res.send('ab?cd')
-})
+app.post('/updata', controlers.updata)
 
 
 app.listen(8888)

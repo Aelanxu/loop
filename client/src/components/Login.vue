@@ -29,7 +29,7 @@ export default {
             this.axios({
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         method: "post",
-        url: `${host}/api/login`,
+        url: `${host}/login`,
         data: {
           userName:this.username,
           pwd: this.password

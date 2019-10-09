@@ -32,6 +32,15 @@ controlers.read = function(req, res) {
         }
     })
 }
+controlers.updata=function(req,res){
+    let data = Object.keys(req.body)[0]
+    let condtition=JSON.stringify({_id:JSON.parse(data)._id})
+    console.log(data)
+    console.log(condtition)
+   cData.updata('jsondata',condtition,data).then(result=>{
+    console.log(result)
+   })
+}
 controlers.pushData = function(req, res) {
 
     let jdata = JSON.parse(Object.keys(req.body)[0])

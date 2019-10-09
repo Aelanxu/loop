@@ -1,9 +1,10 @@
 <template>
 <div id='pushdata'>
-    <div><p>{{apiName}}</p><input type="text" v-model="path"></div>
-    <div><textarea v-model="data" rows="3" cols="20"></textarea></div>
+    <div v-if="jsondata"><p>{{jsondata.apiName}}</p><input type="text" v-model="jsondata.path"></div>
+    <div><textarea v-model="str" rows="3" cols="20"></textarea></div>
+     <button @click="updata()">提交</button> 
 </div>
-    
+  
 </template>
 <script>
 import { host, localDate } from "../../config.js"
@@ -11,9 +12,8 @@ import qs from'Qs'
 export default {
     data(){
         return{
-          apiName:'',
-          path:'',
-          data:''
+          jsondata:null,
+          str:""
         }
     },
     props:['id'],
@@ -23,7 +23,7 @@ export default {
     methods:{
        getdata() {
      // let postData={userId:this.userid,apiName:'登录接口', path:'/test/api',data:{n:111,MJ:'WWW',OBJ:{N:'TT'}}}
-      let postData={userId:this.id}
+      let postData={_id:this.id}
       this.axios({
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         method: "post",
@@ -32,13 +32,35 @@ export default {
       }).then(response => {
          console.log(response);
         if (response.data) {
-          let {apiName,path,data}= response.data[0];
-          this.apiName=apiName
-          this.path=path
-          this.data=JSON.stringify(data)
-          console.log(this.data);
+          this.jsondata=response.data[0]
+          // let {apiName,path,data}=  this.jsondata
+          // this.apiName=apiName
+          // this.path=path
+          // this.data=JSON.stringify(data)
+          console.log(this.jsondata);
+          this.str=JSON.stringify(this.jsondata.data)
         }
       });
+       },
+
+       updata(){
+           let postData=this.jsondata
+               postData.data=JSON.parse(this.str)
+           if(this.id!==""){
+               this.axios({
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        method: "post",
+        url: `${host}/updata`,
+        data: JSON.stringify(postData)
+      }).then(response => {
+         console.log(response);
+        // if (response.data) {
+        
+        //   console.log(this.data);
+        // }
+      });
+
+           }
        }
 
     }
