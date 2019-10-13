@@ -1,4 +1,4 @@
-const host = "http://127.0.0.1:8888";
+const host = "http://127.0.0.1";
 
 function localDate(t = Date.now()) {
     const d = new Date(t);
