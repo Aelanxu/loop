@@ -8,7 +8,7 @@
     <div>
       <textarea v-model="str" rows="30" cols="40"></textarea>
     </div>
-    <button @click="updata()">提交</button>
+    <button @click="dealData()">提交</button>
   </div>
 </template>
 <script>
@@ -17,18 +17,34 @@ import qs from "Qs";
 export default {
   data() {
     return {
-      jsondata: null,
+      jsondata:{
+        apiName:'',
+        path:''
+      },
       str: ""
     };
   },
   props: ["id"],
   mounted() {
-    this.getdata();
+    if(this.id!=='add'){
+    this.getdata(this.id)
+    }
+  
   },
   methods: {
-    getdata() {
-      // let postData={userId:this.userid,apiName:'登录接口', path:'/test/api',data:{n:111,MJ:'WWW',OBJ:{N:'TT'}}}
-      let postData = { _id: this.id };
+   
+    dealData(){
+      console.log(this.id)
+      if(this.id==='add'){
+        this.insertData()
+        console.log('===')
+      }else{
+        //this.updata()
+      }
+    },
+    //get data from aip 
+    getdata(id) {
+      let postData = { _id:id };
       this.axios({
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         method: "post",
@@ -49,7 +65,7 @@ export default {
     },
 
     updata() {
-      let postData = this.jsondata;
+      let postData = this.jsondata
       postData.data = JSON.parse(this.str);
       if (this.id !== "") {
         this.axios({
@@ -63,7 +79,30 @@ export default {
           }
         });
       }
+    },
+     insertData() {
+      let postData = this.jsondata
+          if(this.str){
+             postData.data = JSON.parse(this.str);
+          }
+         
+          console.log(postData)  
+        this.axios({
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          method: "post",
+          url: `${host}/push`,
+          data: JSON.stringify(postData)
+        }).then(response => {
+          if (response.data.length>0) {
+              console.log('success')            
+          }
+           console.log(response)   
+           
+        });
+    
     }
+
+
   }
 };
 </script>
