@@ -21,9 +21,17 @@ controlers.lookUp = function(req, res, next) {
 
 }
 controlers.read = function(req, res) {
-    let data = Object.keys(req.body)[0]
+    let data = JSON.parse(Object.keys(req.body)[0])
 
-    cData.find('jsondata', data).then(result => {
+    let jquery = null
+    if (Object.keys(data)[0] === 'userId') {
+        jquery = { userId: cData.ObjectId(data.userId) }
+    } else {
+        console.log(data)
+        jquery = { _id: cData.ObjectId(data._id) }
+        console.log(jquery)
+    }
+    cData.find('jsondata', jquery).then(result => {
 
         if (result.length > 0) {
             //console.log(result[0])

@@ -26,20 +26,22 @@ export default {
   },
   props: ["id"],
   mounted() {
+    console.log(this.id)
     if(this.id!=='add'){
     this.getdata(this.id)
+   
     }
   
   },
   methods: {
    
     dealData(){
-      console.log(this.id)
+     
       if(this.id==='add'){
         this.insertData()
-        console.log('===')
+ 
       }else{
-        //this.updata()
+        this.updata()
       }
     },
     //get data from aip 
