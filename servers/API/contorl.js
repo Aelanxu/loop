@@ -44,9 +44,10 @@ controlers.read = function(req, res) {
 controlers.update = function(req, res) {
     let data = JSON.parse(Object.keys(req.body)[0])
     let id = cData.ObjectId(data._id)
+
     console.log(data)
-    console.log(id)
-    cData.update('jsondata', { _id: id }, { apiName: data.apiName, path: data.path, data: data.data }).then(result => {
+    console.log(userid)
+    cData.update('jsondata', { _id: id }, { apiName: data.apiName, path: data.path, data: data.data, createTime: data.createTime }).then(result => {
         console.log(result.result.ok)
         if (result.result.ok === 1) {
             res.send({ msg: 'success' })
@@ -57,10 +58,11 @@ controlers.update = function(req, res) {
 controlers.pushData = function(req, res) {
 
     let jdata = JSON.parse(Object.keys(req.body)[0])
+    jdata.userId = cData.ObjectId(jdata.userId)
     console.log(jdata)
 
     cData.add('jsondata', jdata).then(result => {
-        console.log(result.insertedId.toHexString()) //获取返回的ID
+        //console.log(result.insertedId.toHexString()) //获取返回的ID
         let resData = { data: result.ops }
         console.log(result.ops)
         res.send(result.ops)
@@ -69,6 +71,16 @@ controlers.pushData = function(req, res) {
     })
 
 
+}
+controlers.deleteData = function(req, res) {
+    let jdata = JSON.parse(Object.keys(req.body)[0])
+    let id = cData.ObjectId(jdata._id)
+    console.log(jdata)
+    cData.dedata('jsondata', { _id: id }).then(result => {
+        if (result.result.ok === 1) {
+            res.send({ msg: 'success' })
+        }
+    })
 }
 controlers.login = function(req, res) {
     let reqData = Object.keys(req.body)[0]

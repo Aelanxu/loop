@@ -18,8 +18,10 @@ export default {
   data() {
     return {
       jsondata:{
+        userId:sessionStorage.getItem('userId'),
         apiName:'',
-        path:''
+        path:'',
+        createTime:localDate()
       },
       str: ""
     };
@@ -69,6 +71,7 @@ export default {
     updata() {
       let postData = this.jsondata
       postData.data = JSON.parse(this.str);
+      console.log(postData)
       if (this.id !== "") {
         this.axios({
           headers: { "Content-Type": "application/x-www-form-urlencoded" },

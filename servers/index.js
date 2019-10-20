@@ -6,6 +6,7 @@ import { dirname, join } from 'path'
 const __filename = fileURLToPath(
     import.meta.url)
 const __dirname = dirname(__filename)
+
 const app = express();
 app.all('*', function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*')
@@ -24,6 +25,6 @@ app.post('/login', controlers.login) //login interface
 app.post('/push', controlers.pushData) //write data interface
 app.post('/read', controlers.read)
 app.post('/updata', controlers.update)
-
+app.post('/deleteData', controlers.deleteData)
 
 app.listen(80)

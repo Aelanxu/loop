@@ -9,7 +9,7 @@
      <span>{{index+1}}</span>
      <span>{{item.apiName}}</span>
      <span>{{item.path}}</span>
-      <span>删除</span>
+      <span ><a href="javascript:void(0)" @click="deleteData(item._id)">删除</a></span>
      <span><router-link :to="`/data/pushdata/${item._id}`">编辑</router-link></span>
     
     </li>
@@ -31,7 +31,8 @@ export default {
     }
   },
   mounted() {
-  this.getdata()
+      this.getdata()
+      sessionStorage.setItem('userId',this.userid)
   },
     props: ['userid'],
   methods: {
@@ -50,7 +51,23 @@ export default {
           console.log(this.datalist );
         }
       });
-    }
+    },
+    deleteData(id){
+      console.log(id)
+         let postData={_id:id}
+         this.axios({
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        method: "post",
+        url: `${host}/deleteData`,
+        data: JSON.stringify(postData)
+      }).then(response => {
+         console.log(response);
+        if (response.data) {
+                console.log(response.data.msg) 
+                this.getdata()
+        }
+      })
+    },
   }
 };
 </script>
