@@ -26,10 +26,10 @@ export default {
   },
   props: ["id"],
   mounted() {
-    console.log(this.id)
+   // console.log(this.id)
     if(this.id!=='add'){
     this.getdata(this.id)
-   
+    console.log(this.id)
     }
   
   },
