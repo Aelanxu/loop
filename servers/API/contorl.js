@@ -45,8 +45,6 @@ controlers.update = function(req, res) {
     let data = JSON.parse(Object.keys(req.body)[0])
     let id = cData.ObjectId(data._id)
 
-    console.log(data)
-    console.log(userid)
     cData.update('jsondata', { _id: id }, { apiName: data.apiName, path: data.path, data: data.data, createTime: data.createTime }).then(result => {
         console.log(result.result.ok)
         if (result.result.ok === 1) {
